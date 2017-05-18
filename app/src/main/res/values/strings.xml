@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CurrencyConverter</string>
+    <string name="parse_error_text">Ошибка разбора данных</string>
+    <string name="error_message">Произошла ошибка</string>
+    <string name="enter_sum_message">Введите сумму</string>
+    <string name="button_text">перевести</string>
+    <string name="sum">Введите сумму</string>
+    <string name="conversion_error_text">Возникла ошибка при конвертации</string>
+    <string name="empty_list_error_text">В базе данных нет записей. Включите интернет.</string>
+</resources>
