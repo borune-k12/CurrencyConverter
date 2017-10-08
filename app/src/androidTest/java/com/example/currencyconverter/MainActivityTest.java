@@ -13,7 +13,6 @@ import com.example.currencyconverter.iview.IView;
 import com.example.currencyconverter.model.CurrencyModel;
 import com.example.currencyconverter.presenter.CurrencyPresenter;
 import org.hamcrest.Matcher;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +26,6 @@ import java.util.List;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -85,7 +83,7 @@ public class MainActivityTest {
     public void testConvert() {
 
         // waiting for view is being enabled
-        onView(ViewMatchers.withId(R.id.sum)).perform(new ViewAction() {
+        onView(ViewMatchers.withId(R.id.et_summa)).perform(new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
                 return isDisplayed();
@@ -103,11 +101,11 @@ public class MainActivityTest {
             }
         });
 
-        onView(ViewMatchers.withId(R.id.sum)).perform(ViewActions.typeText("1"));
-        onView(ViewMatchers.withId(R.id.trBtn)).perform(ViewActions.click());
+        onView(ViewMatchers.withId(R.id.et_summa)).perform(ViewActions.typeText("1"));
+        onView(ViewMatchers.withId(R.id.btn_convert)).perform(ViewActions.click());
 
         final String[] stringHolder = {null};
-        onView(ViewMatchers.withId(R.id.result)).perform(new ViewAction() {
+        onView(ViewMatchers.withId(R.id.tv_result)).perform(new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
                 return isAssignableFrom(AppCompatTextView.class);

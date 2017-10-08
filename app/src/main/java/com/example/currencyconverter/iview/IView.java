@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public interface IView {
+
     // publish list of char codes callback
     void onPublishList(List<String> charCodes);
 

@@ -22,7 +22,7 @@
             android:text="У меня есть"
             android:layout_marginRight="10dp"
             android:layout_alignParentLeft="true"
-            android:id="@+id/ihavelbl"
+            android:id="@+id/tv_have_label"
             android:textSize="@dimen/labelTextSize"
             android:gravity="center_vertical"
             />
@@ -31,17 +31,17 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:maxLength="9"
-            android:id="@+id/sum"
+            android:id="@+id/et_summa"
             android:hint="@string/sum"
             android:gravity="center"
-            android:layout_toRightOf="@+id/ihavelbl"
-            android:layout_toLeftOf="@+id/srcCurrency"
+            android:layout_toRightOf="@+id/tv_have_label"
+            android:layout_toLeftOf="@+id/spin_currency_from"
             android:enabled="false"
             />
         <android.support.v7.widget.AppCompatSpinner
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/srcCurrency"
+            android:id="@+id/spin_currency_from"
             android:layout_marginBottom="5dp"
             android:layout_alignParentRight="true"
             android:enabled="false"
@@ -57,14 +57,14 @@
             android:text="Хочу приобрести"
             android:textSize="@dimen/labelTextSize"
             android:layout_alignParentLeft="true"
-            android:id="@+id/wanttobuylbl"
+            android:id="@+id/tv_currency_to_label"
             android:gravity="center_vertical"
-            android:layout_toLeftOf="@+id/dstCurrency"
+            android:layout_toLeftOf="@+id/spin_currency_to"
             />
         <android.support.v7.widget.AppCompatSpinner
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/dstCurrency"
+            android:id="@+id/spin_currency_to"
             android:layout_marginBottom="5dp"
             android:layout_alignParentRight="true"
             android:enabled="false"
@@ -78,7 +78,7 @@
         android:text="@string/button_text"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="14dp"
-        android:id="@+id/trBtn"
+        android:id="@+id/btn_convert"
         android:enabled="false"
         />
     <android.support.v7.widget.AppCompatTextView
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textSize="32sp"
-        android:id="@+id/result"
+        android:id="@+id/tv_result"
         android:gravity="center_horizontal"
         tools:text="1500"
         />
@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textSize="12sp"
-        android:id="@+id/resultText"
+        android:id="@+id/tv_result_text"
         android:gravity="center_horizontal"
         tools:text="1500"
         />

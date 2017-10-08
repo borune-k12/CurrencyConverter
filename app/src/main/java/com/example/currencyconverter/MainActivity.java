@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity implements IView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sum = (AppCompatEditText) findViewById(R.id.sum);
-        srcCurrency = (AppCompatSpinner) findViewById(R.id.srcCurrency);
-        dstCurrency = (AppCompatSpinner) findViewById(R.id.dstCurrency);
-        result = ((AppCompatTextView)findViewById(R.id.result));
-        resultText = ((AppCompatTextView)findViewById(R.id.resultText));
-        trBtn = findViewById(R.id.trBtn);
+        sum = (AppCompatEditText) findViewById(R.id.et_summa);
+        srcCurrency = (AppCompatSpinner) findViewById(R.id.spin_currency_from);
+        dstCurrency = (AppCompatSpinner) findViewById(R.id.spin_currency_to);
+        result = ((AppCompatTextView)findViewById(R.id.tv_result));
+        resultText = ((AppCompatTextView)findViewById(R.id.tv_result_text));
+        trBtn = findViewById(R.id.btn_convert);
         trBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
