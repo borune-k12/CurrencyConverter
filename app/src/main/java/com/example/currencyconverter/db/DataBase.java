@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.currencyconverter.XmlParser;
-import com.example.currencyconverter.model.ValuteModel;
+import com.example.currencyconverter.data.Valute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class DataBase {
 
     // fill table
     public void writeData(XmlParser parser) {
-        for(ValuteModel valute : parser.getValCurs().getValutes())
+        for(Valute valute : parser.getValCurs().getValutes())
         {
             ContentValues values = new ContentValues();
 

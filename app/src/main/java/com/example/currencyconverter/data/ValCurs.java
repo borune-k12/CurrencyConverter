@@ -1,4 +1,4 @@
-package com.example.currencyconverter.model;
+package com.example.currencyconverter.data;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 @Root(name = "ValCurs")
-public class ValCursModel {
+public class ValCurs {
 
     @Attribute(name = "Date")
     private String date;
@@ -20,8 +20,8 @@ public class ValCursModel {
     private String name;
 
     @ElementList(name = "Valute", inline = true)
-    private List<ValuteModel> valutes;
+    private List<Valute> valutes;
 
-    public List<ValuteModel> getValutes(){return valutes;}
+    public List<Valute> getValutes(){return valutes;}
 
 }

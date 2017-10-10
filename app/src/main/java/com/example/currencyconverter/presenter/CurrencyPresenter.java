@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.example.currencyconverter.PageLoaderService;
 import com.example.currencyconverter.R;
-import com.example.currencyconverter.iview.IView;
+import com.example.currencyconverter.view.ValuteView;
 import com.example.currencyconverter.model.CurrencyModel;
 
 import java.math.BigDecimal;
@@ -25,7 +25,7 @@ public class CurrencyPresenter {
     public static final String TAG = "CurrencyPresenter";
 
     private CurrencyModel mModel;
-    private IView mIView;
+    private ValuteView mIView;
     private Context mContext;
     private BroadcastReceiver mLocalReceiver;
 
@@ -34,7 +34,7 @@ public class CurrencyPresenter {
         mModel = new CurrencyModel(context);
     }
 
-    public void setIView(IView iview) {
+    public void setIView(ValuteView iview) {
         mIView = iview;
     }
 
@@ -42,7 +42,7 @@ public class CurrencyPresenter {
         mModel = model;
     }
 
-    // start service for getting data
+    // start service for receiving data
     public void requestData() {
         Intent serviceIntent = new Intent(mContext,PageLoaderService.class);
         mContext.startService(serviceIntent);

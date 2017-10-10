@@ -1,4 +1,4 @@
-package com.example.currencyconverter;
+package com.example.currencyconverter.view;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -9,7 +9,10 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import com.example.currencyconverter.iview.IView;
+
+import com.example.currencyconverter.MainActivity;
+import com.example.currencyconverter.R;
+import com.example.currencyconverter.view.ValuteView;
 import com.example.currencyconverter.model.CurrencyModel;
 import com.example.currencyconverter.presenter.CurrencyPresenter;
 import org.hamcrest.Matcher;
@@ -36,7 +39,7 @@ import static org.mockito.Mockito.when;
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class MainActivityTest {
+public class ValuteViewTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
@@ -48,11 +51,10 @@ public class MainActivityTest {
     ArgumentCaptor<String> stringCaptor;
 
     @Mock
-    IView mockedCallback;
+    ValuteView mockedCallback;
 
     @Mock
     CurrencyModel model;
-
 
     // test if interface methods onError and onPublishList are called
     @Test

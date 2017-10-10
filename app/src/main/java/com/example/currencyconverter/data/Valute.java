@@ -1,4 +1,4 @@
-package com.example.currencyconverter.model;
+package com.example.currencyconverter.data;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -9,7 +9,7 @@ import org.simpleframework.xml.Root;
  */
 
 @Root(name = "Valute")
-public class ValuteModel {
+public class Valute {
 
     @Attribute(name = "ID", required = false)
     private String ID;

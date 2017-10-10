@@ -1,5 +1,7 @@
 package com.example.currencyconverter;
 
+import com.example.currencyconverter.data.Valute;
+
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -34,7 +36,7 @@ public class XmlParserTest {
 
         assertEquals(parser.getValCurs().getValutes().size(),2);
 
-        XmlParser.Valute valute = parser.getValCurs().getValutes().get(0);
+        Valute valute = parser.getValCurs().getValutes().get(0);
         assertEquals(valute.getID(),"R01010");
         assertEquals(valute.getNumCode(),"036");
         assertEquals(valute.getCharCode(),"AUD");;

@@ -1,11 +1,7 @@
 package com.example.currencyconverter;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
@@ -14,11 +10,12 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-import com.example.currencyconverter.iview.IView;
+import com.example.currencyconverter.view.ValuteView;
 import com.example.currencyconverter.presenter.CurrencyPresenter;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements IView {
+public class MainActivity extends AppCompatActivity implements ValuteView,
+        NetworkStateReceiver.OnNetworkStateChanged {
 
     private static final String TAG = "MainActivity";
 
@@ -29,10 +26,7 @@ public class MainActivity extends AppCompatActivity implements IView {
     private AppCompatTextView resultText;
     private CurrencyPresenter mPresenter;
     private View trBtn;
-
-    private boolean isConnected = false;
-
-    private BroadcastReceiver mNetworkStateReceiver;
+    private NetworkStateReceiver networkStateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements IView {
             }
         });
 
-
         mPresenter = new CurrencyPresenter(this);
         mPresenter.setIView(this);
     }
@@ -62,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements IView {
     public void onStop() {
         super.onStop();
 
-        unregisterReceiver(mNetworkStateReceiver);
+        unregisterReceiver(networkStateReceiver);
         mPresenter.unregisterReceiver();
     }
 
@@ -70,24 +63,9 @@ public class MainActivity extends AppCompatActivity implements IView {
     public void onStart() {
         super.onStart();
 
-        mNetworkStateReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                if(action.equalsIgnoreCase(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                    if(!isConnected)
-                        mPresenter.requestData();
+        networkStateReceiver = new NetworkStateReceiver(this);
 
-                    final NetworkInfo netInfo = ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
-
-                    if(netInfo != null && netInfo.isConnected()) {
-                        isConnected = true;
-                    } else isConnected = false;
-                }
-            }
-        };
-
-        registerReceiver(mNetworkStateReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        registerReceiver(networkStateReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         mPresenter.registerReceiver();
     }
@@ -115,6 +93,16 @@ public class MainActivity extends AppCompatActivity implements IView {
         Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
         result.setText("");
         resultText.setText("");
+    }
+
+    @Override
+    public void networkConnected() {
+        mPresenter.requestData();
+    }
+
+    @Override
+    public void networkDisconnected() {
+
     }
 }
 
