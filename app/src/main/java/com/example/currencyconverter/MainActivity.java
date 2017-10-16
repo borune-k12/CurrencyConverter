@@ -19,30 +19,32 @@ public class MainActivity extends AppCompatActivity implements ValuteView,
 
     private static final String TAG = "MainActivity";
 
-    private AppCompatEditText sum;
-    private AppCompatSpinner srcCurrency;
-    private AppCompatSpinner dstCurrency;
-    private AppCompatTextView result;
-    private AppCompatTextView resultText;
+    private AppCompatEditText mSumma;
+    private AppCompatSpinner mCurrencyFrom;
+    private AppCompatSpinner mCurrencyTo;
+    private AppCompatTextView mResult;
+    private AppCompatTextView mResultText;
+    private View mBtnConvert;
+
     private CurrencyPresenter mPresenter;
-    private View trBtn;
-    private NetworkStateReceiver networkStateReceiver;
+
+    private NetworkStateReceiver mNetworkStateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sum = (AppCompatEditText) findViewById(R.id.et_summa);
-        srcCurrency = (AppCompatSpinner) findViewById(R.id.spin_currency_from);
-        dstCurrency = (AppCompatSpinner) findViewById(R.id.spin_currency_to);
-        result = ((AppCompatTextView)findViewById(R.id.tv_result));
-        resultText = ((AppCompatTextView)findViewById(R.id.tv_result_text));
-        trBtn = findViewById(R.id.btn_convert);
-        trBtn.setOnClickListener(new View.OnClickListener() {
+        mSumma = (AppCompatEditText) findViewById(R.id.et_summa);
+        mCurrencyFrom = (AppCompatSpinner) findViewById(R.id.spin_currency_from);
+        mCurrencyTo = (AppCompatSpinner) findViewById(R.id.spin_currency_to);
+        mResult = ((AppCompatTextView)findViewById(R.id.tv_result));
+        mResultText = ((AppCompatTextView)findViewById(R.id.tv_result_text));
+        mBtnConvert = findViewById(R.id.btn_convert);
+        mBtnConvert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.convert(sum.getText().toString(),srcCurrency.getSelectedItem().toString(),dstCurrency.getSelectedItem().toString());
+                mPresenter.convert(mSumma.getText().toString(), mCurrencyFrom.getSelectedItem().toString(), mCurrencyTo.getSelectedItem().toString());
             }
         });
 
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements ValuteView,
     public void onStop() {
         super.onStop();
 
-        unregisterReceiver(networkStateReceiver);
+        unregisterReceiver(mNetworkStateReceiver);
         mPresenter.unregisterReceiver();
     }
 
@@ -63,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements ValuteView,
     public void onStart() {
         super.onStart();
 
-        networkStateReceiver = new NetworkStateReceiver(this);
+        mNetworkStateReceiver = new NetworkStateReceiver();
 
-        registerReceiver(networkStateReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        registerReceiver(mNetworkStateReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         mPresenter.registerReceiver();
     }
@@ -74,25 +76,25 @@ public class MainActivity extends AppCompatActivity implements ValuteView,
     public void onPublishList(List<String> charCodes) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
                 R.layout.spinner_item, charCodes);
-        srcCurrency.setAdapter(adapter);
-        dstCurrency.setAdapter(adapter);
-        trBtn.setEnabled(true);
-        sum.setEnabled(true);
-        srcCurrency.setEnabled(true);
-        dstCurrency.setEnabled(true);
+        mCurrencyFrom.setAdapter(adapter);
+        mCurrencyTo.setAdapter(adapter);
+        mBtnConvert.setEnabled(true);
+        mSumma.setEnabled(true);
+        mCurrencyFrom.setEnabled(true);
+        mCurrencyTo.setEnabled(true);
     }
 
     @Override
     public void onConvert(String value, String text) {
-        result.setText(value);
-        resultText.setText(text);
+        mResult.setText(value);
+        mResultText.setText(text);
     }
 
     @Override
     public void onError(String error) {
         Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
-        result.setText("");
-        resultText.setText("");
+        mResult.setText("");
+        mResultText.setText("");
     }
 
     @Override

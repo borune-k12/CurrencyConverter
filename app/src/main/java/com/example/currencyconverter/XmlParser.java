@@ -13,11 +13,11 @@ import java.io.StringReader;
 
 public class XmlParser {
 
-    ValCurs mCurrencies;
+    private ValCurs mCurrencies;
 
     public ValCurs getValCurs() { return mCurrencies; }
 
-    public boolean parse(String xml){
+    public boolean parse(String xml) {
         Reader reader = new StringReader(xml);
         Persister serializer = new Persister();
         try

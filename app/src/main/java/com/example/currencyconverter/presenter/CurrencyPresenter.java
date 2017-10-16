@@ -25,7 +25,7 @@ public class CurrencyPresenter {
     public static final String TAG = "CurrencyPresenter";
 
     private CurrencyModel mModel;
-    private ValuteView mIView;
+    private ValuteView mValuteView;
     private Context mContext;
     private BroadcastReceiver mLocalReceiver;
 
@@ -35,7 +35,7 @@ public class CurrencyPresenter {
     }
 
     public void setIView(ValuteView iview) {
-        mIView = iview;
+        mValuteView = iview;
     }
 
     public void setModel(CurrencyModel model) {
@@ -51,22 +51,22 @@ public class CurrencyPresenter {
     // convert from srcValute to dstValute
     public void convert(String sum, String srcValute, String dstValute) {
         if(sum.equals("")) {
-            if(mIView != null)
-                mIView.onError(mContext.getString(R.string.enter_sum_message));
+            if(mValuteView != null)
+                mValuteView.onError(mContext.getString(R.string.enter_sum_message));
             return;
         }
 
         float cnt = Float.valueOf(sum);
         double coef = mModel.getConversionCoefficient(dstValute,srcValute);
         if(coef == 0) {
-            if(mIView != null)
-                mIView.onError(mContext.getString(R.string.conversion_error_text));
+            if(mValuteView != null)
+                mValuteView.onError(mContext.getString(R.string.conversion_error_text));
             return;
         }
         BigDecimal round = new BigDecimal(new Float(cnt*coef).floatValue()).setScale(2,BigDecimal.ROUND_HALF_UP);
 
-        if(mIView != null)
-            mIView.onConvert(round.toPlainString(),new BigDecimal(sum).setScale(2,BigDecimal.ROUND_HALF_UP).toPlainString() + " " + mModel.getValuteName(srcValute) +
+        if(mValuteView != null)
+            mValuteView.onConvert(round.toPlainString(),new BigDecimal(sum).setScale(2,BigDecimal.ROUND_HALF_UP).toPlainString() + " " + mModel.getValuteName(srcValute) +
                 " = " + round.toPlainString() + " " + mModel.getValuteName(dstValute));
     }
 
@@ -74,12 +74,12 @@ public class CurrencyPresenter {
     public void publish() {
         List<String> codes = mModel.getCurrencyCodes();
         if(codes.size() > 0) {
-            if (mIView != null)
-                mIView.onPublishList(codes);
+            if (mValuteView != null)
+                mValuteView.onPublishList(codes);
         }
         else {
-            if(mIView != null)
-                mIView.onError(mContext.getString(R.string.empty_list_error_text));
+            if(mValuteView != null)
+                mValuteView.onError(mContext.getString(R.string.empty_list_error_text));
         }
     }
 

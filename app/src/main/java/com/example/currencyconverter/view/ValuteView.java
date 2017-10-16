@@ -11,7 +11,7 @@ public interface ValuteView {
     // publish list of char codes callback
     void onPublishList(List<String> charCodes);
 
-    // convertion result
+    // conversion result
     void onConvert(String value, String text);
 
     // error

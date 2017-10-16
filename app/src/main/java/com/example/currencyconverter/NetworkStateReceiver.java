@@ -12,9 +12,7 @@ import android.net.NetworkInfo;
 
 public class NetworkStateReceiver extends BroadcastReceiver {
 
-    private Context context;
-
-    public NetworkStateReceiver(Context context) {this.context = context;}
+    public NetworkStateReceiver() {}
 
     @Override
     public void onReceive(Context context, Intent intent) {

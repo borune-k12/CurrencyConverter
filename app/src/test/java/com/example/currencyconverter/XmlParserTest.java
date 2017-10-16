@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class XmlParserTest {
 
-    private final String content = "<ValCurs Date=\"17.05.2017\" name=\"Foreign Currency Market\">\n" +
+    private final String mContent = "<ValCurs Date=\"17.05.2017\" name=\"Foreign Currency Market\">\n" +
             "<Valute ID=\"R01010\">\n" +
             "<NumCode>036</NumCode>\n" +
             "<CharCode>AUD</CharCode>\n" +
@@ -32,7 +32,7 @@ public class XmlParserTest {
     public void parseTest() {
         XmlParser parser = new XmlParser();
 
-        parser.parse(content);
+        parser.parse(mContent);
 
         assertEquals(parser.getValCurs().getValutes().size(),2);
 

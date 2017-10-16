@@ -14,23 +14,23 @@ import java.util.List;
 public class CurrencyModel {
 
     private Context mContext;
-    private DataBase db;
+    private DataBase mDB;
 
     public CurrencyModel(Context context) {
         mContext = context;
-        db = DataBase.getInstance(mContext);
+        mDB = DataBase.getInstance(mContext);
     }
 
     public List<String> getCurrencyCodes() {
-        return db.getCurrencies();
+        return mDB.getCurrencies();
     }
 
     public double getConversionCoefficient(String src, String dst) {
-        return db.getCoefficient(src,dst);
+        return mDB.getCoefficient(src,dst);
     }
 
     public String getValuteName(String charCode) {
-        return db.getValuteName(charCode);
+        return mDB.getValuteName(charCode);
     }
 
 }

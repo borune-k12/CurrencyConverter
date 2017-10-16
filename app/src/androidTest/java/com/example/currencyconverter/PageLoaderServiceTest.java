@@ -27,19 +27,19 @@ public class PageLoaderServiceTest {
 
         // wait while service is being started
         try {
-            Thread.sleep(50);
+            Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertTrue(PageLoaderService.started);
+        assertTrue(PageLoaderService.sStarted);
 
         // wait while service is being stopped
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        assertFalse(PageLoaderService.started);
+        assertFalse(PageLoaderService.sStarted);
     }
 
 }

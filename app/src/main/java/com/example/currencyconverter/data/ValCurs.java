@@ -14,14 +14,14 @@ import java.util.List;
 public class ValCurs {
 
     @Attribute(name = "Date")
-    private String date;
+    private String mDate;
 
     @Attribute (name = "name")
-    private String name;
+    private String mName;
 
     @ElementList(name = "Valute", inline = true)
-    private List<Valute> valutes;
+    private List<Valute> mValutes;
 
-    public List<Valute> getValutes(){return valutes;}
+    public List<Valute> getValutes(){return mValutes;}
 
 }

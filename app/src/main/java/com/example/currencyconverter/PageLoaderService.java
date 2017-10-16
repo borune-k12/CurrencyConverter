@@ -31,18 +31,18 @@ public class PageLoaderService extends Service {
     public final static String ERROR_STRING = "EXTRA_ERROR_STRING";
 
     @RestrictTo (RestrictTo.Scope.TESTS)
-    static boolean started = false;
+    static boolean sStarted = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        started = true;
+        sStarted = true;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        started = false;
+        sStarted = false;
     }
 
     private void loadPage(URL url) {
@@ -125,7 +125,7 @@ public class PageLoaderService extends Service {
                 }
             }).start();
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
 }

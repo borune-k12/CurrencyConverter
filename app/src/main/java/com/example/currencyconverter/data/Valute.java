@@ -12,28 +12,28 @@ import org.simpleframework.xml.Root;
 public class Valute {
 
     @Attribute(name = "ID", required = false)
-    private String ID;
-    public String getID() { return ID;}
+    private String mID;
+    public String getID() { return mID;}
 
     @Element(name="NumCode", required = false)
-    private String NumCode;
-    public String getNumCode() { return NumCode;}
+    private String mNumCode;
+    public String getNumCode() { return mNumCode;}
 
     @Element (name="CharCode", required = false)
-    private String CharCode;
-    public String getCharCode() { return CharCode;}
+    private String mCharCode;
+    public String getCharCode() { return mCharCode;}
 
     @Element (name="Nominal")
-    private int Nominal;
-    public int getNominal() { return Nominal;}
+    private int mNominal;
+    public int getNominal() { return mNominal;}
 
     @Element (name="Name")
-    private String Name;
-    public String getName() { return Name;}
+    private String mName;
+    public String getName() { return mName;}
 
     @Element (name="Value")
-    private String Value;
-    public Double getValue() { return Double.valueOf(Value.replace(",","."));}
+    private String mValue;
+    public Double getValue() { return Double.valueOf(mValue.replace(",","."));}
 
 }
 

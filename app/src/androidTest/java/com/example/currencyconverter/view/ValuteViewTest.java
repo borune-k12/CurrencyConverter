@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.example.currencyconverter.MainActivity;
 import com.example.currencyconverter.R;
-import com.example.currencyconverter.view.ValuteView;
 import com.example.currencyconverter.model.CurrencyModel;
 import com.example.currencyconverter.presenter.CurrencyPresenter;
 import org.hamcrest.Matcher;
@@ -42,19 +41,19 @@ import static org.mockito.Mockito.when;
 public class ValuteViewTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Captor
-    ArgumentCaptor<List<String>> listCaptor;
+    ArgumentCaptor<List<String>> mListCaptor;
 
     @Captor
-    ArgumentCaptor<String> stringCaptor;
+    ArgumentCaptor<String> mStringCaptor;
 
     @Mock
-    ValuteView mockedCallback;
+    ValuteView mMockedCallback;
 
     @Mock
-    CurrencyModel model;
+    CurrencyModel mModel;
 
     // test if interface methods onError and onPublishList are called
     @Test
@@ -62,22 +61,25 @@ public class ValuteViewTest {
 
         Context context = InstrumentationRegistry.getTargetContext();
         CurrencyPresenter pr = new CurrencyPresenter(context);
-        pr.setIView(mockedCallback);
+        pr.setIView(mMockedCallback);
         pr.publish();
 
-        verify(mockedCallback).onPublishList(listCaptor.capture());
-        assertTrue(listCaptor.getValue().size()>0);
+        verify(mMockedCallback).onPublishList(mListCaptor.capture());
+        assertTrue(mListCaptor.getValue().size()>0);
 
+        // trying to convert without entering sum
         pr.convert("","","");
+        // trying to convert without valutes names
         pr.convert("1","","");
-        when(model.getCurrencyCodes()).thenReturn(new ArrayList<String>());
-        pr.setModel(model);
+        when(mModel.getCurrencyCodes()).thenReturn(new ArrayList<String>());
+        pr.setModel(mModel);
+        // trying to publish empty list
         pr.publish();
-        verify(mockedCallback,times(3)).onError(stringCaptor.capture());
+        verify(mMockedCallback,times(3)).onError(mStringCaptor.capture());
 
-        assertEquals(context.getString(R.string.enter_sum_message), stringCaptor.getAllValues().get(0));
-        assertEquals(context.getString(R.string.conversion_error_text), stringCaptor.getAllValues().get(1));
-        assertEquals(context.getString(R.string.empty_list_error_text), stringCaptor.getAllValues().get(2));
+        assertEquals(context.getString(R.string.enter_sum_message), mStringCaptor.getAllValues().get(0));
+        assertEquals(context.getString(R.string.conversion_error_text), mStringCaptor.getAllValues().get(1));
+        assertEquals(context.getString(R.string.empty_list_error_text), mStringCaptor.getAllValues().get(2));
     }
 
     // test if interface method onConvert is called
@@ -103,7 +105,9 @@ public class ValuteViewTest {
             }
         });
 
+        // type "1" in sum
         onView(ViewMatchers.withId(R.id.et_summa)).perform(ViewActions.typeText("1"));
+        // clicking on convert button
         onView(ViewMatchers.withId(R.id.btn_convert)).perform(ViewActions.click());
 
         final String[] stringHolder = {null};
